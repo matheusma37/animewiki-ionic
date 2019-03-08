@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { CharacterPage } from '../character/character';
 
 /**
  * Generated class for the CharactersPage page.
@@ -14,11 +15,22 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
   templateUrl: 'characters.html',
 })
 export class CharactersPage {
-  characters: { id: number, name: string, photo: string, anime: {id: number, name: string} }[] = [
+  characters: {
+    id: number,
+    name: string,
+    photo: string,
+    description: string,
+    anime:
+      {
+        id: number,
+        name: string
+      }
+    }[] = [
     {
       id: 1,
       name: "Guts",
       photo: "#",
+      description: "Espadachin negro.",
       anime: {
         id: 1,
         name: "Berserk"
@@ -28,6 +40,7 @@ export class CharactersPage {
       id: 2,
       name: "Ash",
       photo: "#",
+      description: "Treinador pokémon.",
       anime: {
         id: 1,
         name: "Pokémon"
@@ -37,6 +50,7 @@ export class CharactersPage {
       id: 3,
       name: "Takato",
       photo: "#",
+      description: "Domador digimon.",
       anime: {
         id: 1,
         name: "Digimon"
@@ -61,12 +75,7 @@ export class CharactersPage {
   }
 
   showCharacter(id){
-    let alert = this.alertCtrl.create({
-      title: 'Teste!',
-      subTitle: 'Mostrando character...',
-      buttons: ['Ok']
-    });
-    alert.present();
+    this.navCtrl.push(CharacterPage, {id: id});
   }
 
   updateCharacter(id){

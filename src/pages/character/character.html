@@ -4,7 +4,7 @@
           <ion-icon name="menu"></ion-icon>
         </button>
         <ion-title>
-            Anime
+            Character
         </ion-title>
       </ion-navbar>
 </ion-header>
@@ -13,35 +13,44 @@
     <ion-grid>
         <ion-row align-items-center>
           <ion-col col-12>
-              <img src="{{anime.photo}}"/>
+              <img src="{{character.photo}}"/>
           </ion-col>
         </ion-row>
-        <h3>{{anime.name}}</h3>
+        <h3>{{character.name}}</h3>
         <ion-row>
             <ion-col col-auto>
                 <p>
-                    {{anime.description}}
+                    {{character.description}}
                 </p>
             </ion-col>
-        </ion-row><ion-row>
+        </ion-row>
+        <ion-row>
+            <ion-col col-4>
+                Anime:
+            </ion-col>
+            <ion-col col>
+                {{character.anime.name}}
+            </ion-col>
+        </ion-row>
+        <ion-row>
             <ion-col col-4>
                 Id:
             </ion-col>
             <ion-col col>
-                {{anime.id}}
+                {{character.id}}
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col col-4 push-2>
-                <button ion-button color="secondary" (click)="updateAnime()">
+                <button ion-button color="secondary" (click)="updateCharacter()">
                     <ion-icon name="create" icon-left> update</ion-icon>
                 </button>
             </ion-col>
             <ion-col col-4 push-2>
-                <button ion-button color="danger" (click)="deleteAnime()">
+                <button ion-button color="danger" (click)="deleteCharacter()">
                     <ion-icon name="trash" icon-left> delete</ion-icon>
                 </button>
             </ion-col>
         </ion-row>
-      </ion-grid>
+    </ion-grid>
 </ion-content>

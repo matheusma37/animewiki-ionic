@@ -10,6 +10,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AnimesPage } from '../pages/animes/animes';
 import { CharactersPage } from '../pages/characters/characters';
 import { AnimePage } from '../pages/anime/anime';
+import { CharacterPage } from '../pages/character/character';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { AnimePage } from '../pages/anime/anime';
     HomePage,
     AnimePage,
     AnimesPage,
+    CharacterPage,
     CharactersPage
   ],
   imports: [
@@ -29,6 +31,7 @@ import { AnimePage } from '../pages/anime/anime';
     HomePage,
     AnimePage,
     AnimesPage,
+    CharacterPage,
     CharactersPage
   ],
   providers: [
