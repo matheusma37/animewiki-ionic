@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { AnimeFormPage } from '../anime-form/anime-form';
 
 /**
- * Generated class for the AnimePage page.
+ * Generated class for the AnimeFormPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,12 +10,12 @@ import { AnimeFormPage } from '../anime-form/anime-form';
 
 @IonicPage()
 @Component({
-  selector: 'page-anime',
-  templateUrl: 'anime.html',
+  selector: 'page-anime-form',
+  templateUrl: 'anime-form.html',
 })
-
-export class AnimePage {
+export class AnimeFormPage {
   anime: { id: number, name: string, photo: string, description: string } = null;
+  file: File = null;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private alertCtrl: AlertController) {
@@ -41,23 +40,32 @@ export class AnimePage {
       }
     ];
 
-    this.anime = animes[parseInt(navParams.get('id'))-1];
+    if(navParams.get('id')){
+      console.log('Parâmetro passado!');
+      this.anime = animes[parseInt(navParams.get('id'))-1];
+    } else {
+      console.log('Parâmetro não passado!');
+      this.anime = { id: null, name: '', photo: '', description: '' };
+    }
   }
 
-  updateAnime(){
-    this.navCtrl.push(AnimeFormPage, {id: this.anime.id});
-  }
-
-  deleteAnime(){
+  saveAnime(){
+    if(this.file){
+      this.anime.photo = this.file.name;
+    }
     let alert = this.alertCtrl.create({
       title: 'Teste!',
-      subTitle: 'Deletando anime...',
+      subTitle: 'Salvando anime!',
       buttons: ['Ok']
     });
     alert.present();
   }
 
+  updateFile(event){
+    this.file = event.srcElement.files[0];
+  }
+
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AnimePage');
+    console.log('ionViewDidLoad AnimeFormPage');
   }
 }

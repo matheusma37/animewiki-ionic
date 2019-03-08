@@ -1,3 +1,4 @@
+import { AnimeFormPage } from './../pages/anime-form/anime-form';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -18,6 +19,7 @@ import { CharacterPage } from '../pages/character/character';
     HomePage,
     AnimePage,
     AnimesPage,
+    AnimeFormPage,
     CharacterPage,
     CharactersPage
   ],
@@ -31,6 +33,7 @@ import { CharacterPage } from '../pages/character/character';
     HomePage,
     AnimePage,
     AnimesPage,
+    AnimeFormPage,
     CharacterPage,
     CharactersPage
   ],

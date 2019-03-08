@@ -7,8 +7,14 @@
 
   <ion-content>
     <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
+      <button menuClose ion-item (click)="openPage(pages[0].info)">
+        <ion-icon name="home"> {{pages[0].info.title}}</ion-icon>
+      </button>
+      <button menuClose ion-item (click)="openPage(pages[1].info)">
+        <ion-icon name="laptop"> {{pages[1].info.title}}</ion-icon>
+      </button>
+      <button menuClose ion-item (click)="openPage(pages[2].info)">
+        <ion-icon name="person"> {{pages[2].info.title}}</ion-icon>
       </button>
     </ion-list>
   </ion-content>

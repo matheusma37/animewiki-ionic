@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { AnimePage } from '../anime/anime';
+import { AnimeFormPage } from '../anime-form/anime-form';
 
 /**
  * Generated class for the AnimesPage page.
@@ -41,12 +42,7 @@ export class AnimesPage {
   }
 
   newAnime(){
-    let alert = this.alertCtrl.create({
-      title: 'Teste!',
-      subTitle: 'Criando anime...',
-      buttons: ['Ok']
-    });
-    alert.present();
+    this.navCtrl.push(AnimeFormPage);
   }
 
   showAnime(id){
@@ -54,12 +50,7 @@ export class AnimesPage {
   }
 
   updateAnime(id){
-    let alert = this.alertCtrl.create({
-      title: 'Teste!',
-      subTitle: 'Atualizando anime...',
-      buttons: ['Ok']
-    });
-    alert.present();
+    this.navCtrl.push(AnimeFormPage, {id: id});
   }
 
   deleteAnime(id){
