@@ -9,11 +9,13 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AnimesPage } from '../pages/animes/animes';
 import { CharactersPage } from '../pages/characters/characters';
+import { AnimePage } from '../pages/anime/anime';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
+    AnimePage,
     AnimesPage,
     CharactersPage
   ],
@@ -25,6 +27,7 @@ import { CharactersPage } from '../pages/characters/characters';
   entryComponents: [
     MyApp,
     HomePage,
+    AnimePage,
     AnimesPage,
     CharactersPage
   ],

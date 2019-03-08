@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { AnimePage } from '../anime/anime';
 
 /**
  * Generated class for the AnimesPage page.
@@ -14,21 +15,24 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
   templateUrl: 'animes.html',
 })
 export class AnimesPage {
-  animes: { id: number, name: string, photo: string }[] = [
+  animes: { id: number, name: string, photo: string, description: string }[] = [
     {
       id: 1,
       name: "Berserk",
-      photo: "#"
+      photo: "#",
+      description: "Anime de terror."
     },
     {
       id: 2,
       name: "Pokémon",
-      photo: "#"
+      photo: "#",
+      description: "Anime de fantasia."
     },
     {
       id: 3,
       name: "Digimon",
-      photo: "#"
+      photo: "#",
+      description: "Anime de aventura."
     }
   ];
 
@@ -46,12 +50,7 @@ export class AnimesPage {
   }
 
   showAnime(id){
-    let alert = this.alertCtrl.create({
-      title: 'Teste!',
-      subTitle: 'Mostrando anime...',
-      buttons: ['Ok']
-    });
-    alert.present();
+    this.navCtrl.push(AnimePage, {id: id});
   }
 
   updateAnime(id){
