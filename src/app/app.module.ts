@@ -8,12 +8,14 @@ import { HomePage } from '../pages/home/home';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AnimesPage } from '../pages/animes/animes';
+import { CharactersPage } from '../pages/characters/characters';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    AnimesPage
+    AnimesPage,
+    CharactersPage
   ],
   imports: [
     BrowserModule,
@@ -23,7 +25,8 @@ import { AnimesPage } from '../pages/animes/animes';
   entryComponents: [
     MyApp,
     HomePage,
-    AnimesPage
+    AnimesPage,
+    CharactersPage
   ],
   providers: [
     StatusBar,
