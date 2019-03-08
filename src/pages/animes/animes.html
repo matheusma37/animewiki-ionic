@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Animes</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+        <ion-item-sliding *ngFor="let anime of animes">
+            <ion-item (click)="showAnime(anime.id)">
+                <ion-avatar item-start>
+                    <img src={{anime.photo}}>
+                </ion-avatar>
+                <h2>{{anime.name}}</h2>
+            </ion-item>
+            <ion-item-options side="right">
+                <button ion-button color="secondary" (click)="updateAnime(anime.id)">
+                    <ion-icon name="create" icon-left> update</ion-icon>
+                </button>
+                <button ion-button color="danger" (click)="deleteAnime(anime.id)">
+                    <ion-icon name="trash" icon-left> delete</ion-icon>
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+    <ion-fab right bottom>
+        <button ion-fab color="primary" (click)="newAnime()" item-end>
+            <ion-icon name="add"></ion-icon>
+        </button>
+    </ion-fab>
+</ion-content>
