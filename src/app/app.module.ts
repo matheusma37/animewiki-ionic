@@ -1,3 +1,4 @@
+import { CharacterFormPage } from './../pages/character-form/character-form';
 import { AnimeFormPage } from './../pages/anime-form/anime-form';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -21,7 +22,8 @@ import { CharacterPage } from '../pages/character/character';
     AnimesPage,
     AnimeFormPage,
     CharacterPage,
-    CharactersPage
+    CharactersPage,
+    CharacterFormPage
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,8 @@ import { CharacterPage } from '../pages/character/character';
     AnimesPage,
     AnimeFormPage,
     CharacterPage,
-    CharactersPage
+    CharactersPage,
+    CharacterFormPage
   ],
   providers: [
     StatusBar,

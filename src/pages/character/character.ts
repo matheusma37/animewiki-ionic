@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { CharacterFormPage } from '../character-form/character-form';
 
 /**
  * Generated class for the CharacterPage page.
@@ -72,12 +73,7 @@ export class CharacterPage {
   }
 
   updateCharacter(){
-    let alert = this.alertCtrl.create({
-      title: 'Teste!',
-      subTitle: 'Atualizando character...',
-      buttons: ['Ok']
-    });
-    alert.present();
+    this.navCtrl.push(CharacterFormPage, {id: this.character.id});
   }
 
   deleteCharacter(){
