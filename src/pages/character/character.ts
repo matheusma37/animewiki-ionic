@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { CharacterFormPage } from '../character-form/character-form';
+import { CharactersProvider } from '../../providers/characters/characters';
 
 /**
  * Generated class for the CharacterPage page.
@@ -15,61 +16,21 @@ import { CharacterFormPage } from '../character-form/character-form';
   templateUrl: 'character.html',
 })
 export class CharacterPage {
-  character: {
-      id: number,
-      name: string,
-      photo: string,
-      description: string,
-      anime: {
-        id: number,
-        name: string
-      }
-    } = null;
+  character: any;
+  
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private alertCtrl: AlertController) {
-    var characters: {
-        id: number,
-        name: string,
-        photo: string,
-        description: string,
-        anime: {
-          id: number,
-          name: string
-        }
-      }[] = [
-      {
-        id: 1,
-        name: "Guts",
-        photo: "#",
-        description: "Espadachin negro.",
-        anime: {
-          id: 1,
-          name: "Berserk"
-        }
-      },
-      {
-        id: 2,
-        name: "Ash",
-        photo: "#",
-        description: "Treinador pokémon.",
-        anime: {
-          id: 1,
-          name: "Pokémon"
-        }
-      },
-      {
-        id: 3,
-        name: "Takato",
-        photo: "#",
-        description: "Domador digimon.",
-        anime: {
-          id: 1,
-          name: "Digimon"
-        }
+    private toast: ToastController, public charactersProvider: CharactersProvider) {
+      this.getCharacter(navParams.get('id'));
+  }
+  
+  getCharacter(id: number) {
+    this.charactersProvider.findById(id)
+    .then(
+      data => {
+        this.character = data;
+        console.log(this.character);
       }
-    ];
-
-    this.character = characters[parseInt(navParams.get('id'))-1];
+    );
   }
 
   updateCharacter(){
@@ -77,12 +38,19 @@ export class CharacterPage {
   }
 
   deleteCharacter(){
-    let alert = this.alertCtrl.create({
-      title: 'Teste!',
-      subTitle: 'Deletando character...',
-      buttons: ['Ok']
-    });
-    alert.present();
+    this.charactersProvider.deleteById(this.character.id)
+    .then(
+      () => {
+        this.toast.create(
+          {
+            message:'Character removido.',
+            duration:3000,
+            position:'botton'
+          }
+        ).present();
+        this.navCtrl.popToRoot();
+      }
+    )
   }
 
   ionViewDidLoad() {

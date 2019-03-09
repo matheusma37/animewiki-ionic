@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { AnimesProvider, Anime } from '../../providers/animes/animes';
 
 /**
  * Generated class for the AnimeFormPage page.
@@ -14,51 +15,47 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
   templateUrl: 'anime-form.html',
 })
 export class AnimeFormPage {
-  anime: { id: number, name: string, photo: string, description: string } = null;
+  anime: any;
   file: File = null;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private alertCtrl: AlertController) {
-    var animes: { id: number, name: string, photo: string, description: string }[] = [
-      {
-        id: 1,
-        name: "Berserk",
-        photo: "#",
-        description: "Anime de terror."
-      },
-      {
-        id: 2,
-        name: "Pokémon",
-        photo: "#",
-        description: "Anime de fantasia."
-      },
-      {
-        id: 3,
-        name: "Digimon",
-        photo: "#",
-        description: "Anime de aventura."
-      }
-    ];
-
+    private toast: ToastController, public animesProvider: AnimesProvider){
+    
     if(navParams.get('id')){
-      console.log('Parâmetro passado!');
-      this.anime = animes[parseInt(navParams.get('id'))-1];
+      this.getAnime(navParams.get('id'));
     } else {
-      console.log('Parâmetro não passado!');
-      this.anime = { id: null, name: '', photo: '', description: '' };
+      this.anime = new Anime();
     }
+  }
+
+  getAnime(id: number) {
+    this.animesProvider.findById(id)
+    .then(
+      data => {
+        this.anime = data;
+        console.log(this.anime);
+      }
+    );
   }
 
   saveAnime(){
     if(this.file){
       this.anime.photo = this.file.name;
     }
-    let alert = this.alertCtrl.create({
-      title: 'Teste!',
-      subTitle: 'Salvando anime!',
-      buttons: ['Ok']
-    });
-    alert.present();
+
+    this.animesProvider.save(this.anime)
+    .then(
+      () => {
+        this.toast.create(
+          {
+            message:'Anime salvo.',
+            duration:3000,
+            position:'botton'
+          }
+        ).present();
+        this.navCtrl.popToRoot();
+      }
+    )
   }
 
   updateFile(event){

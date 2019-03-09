@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { CharactersProvider, Character } from '../../providers/characters/characters';
+import { AnimesProvider } from '../../providers/animes/animes';
 
 /**
  * Generated class for the CharacterFormPage page.
@@ -14,113 +16,63 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
   templateUrl: 'character-form.html',
 })
 export class CharacterFormPage {
-  character: {
-    id: number,
-    name: string,
-    photo: string,
-    description: string,
-    anime: {
-      id: number,
-      name: string
-    }
-  } = null;
+  character: any;
+  anime: any;
+  anime_id: number = 0;
   file: File = null;
-  anime_id: number = 1;
-  animes: { id: number, name: string, photo: string, description: string }[] = [
-    {
-      id: 1,
-      name: "Berserk",
-      photo: "#",
-      description: "Anime de terror."
-    },
-    {
-      id: 2,
-      name: "Pokémon",
-      photo: "#",
-      description: "Anime de fantasia."
-    },
-    {
-      id: 3,
-      name: "Digimon",
-      photo: "#",
-      description: "Anime de aventura."
-    }
-  ];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private alertCtrl: AlertController) {
-    var characters: {
-        id: number,
-        name: string,
-        photo: string,
-        description: string,
-        anime: {
-          id: number,
-          name: string
-        }
-      }[] = [
-      {
-        id: 1,
-        name: "Guts",
-        photo: "#",
-        description: "Espadachin negro.",
-        anime: {
-          id: 1,
-          name: "Berserk"
-        }
-      },
-      {
-        id: 2,
-        name: "Ash",
-        photo: "#",
-        description: "Treinador pokémon.",
-        anime: {
-          id: 1,
-          name: "Pokémon"
-        }
-      },
-      {
-        id: 3,
-        name: "Takato",
-        photo: "#",
-        description: "Domador digimon.",
-        anime: {
-          id: 1,
-          name: "Digimon"
-        }
-      }
-    ];
-
+    private toast: ToastController, public charactersProvider: CharactersProvider,
+    public animesProvider: AnimesProvider) {
+    
     if(navParams.get('id')){
-      console.log('Parâmetro passado!');
-      this.character = characters[parseInt(navParams.get('id'))-1];
+      this.getCharacter(navParams.get('id'));
     } else {
-      console.log('Parâmetro não passado!');
-      this.character = {
-        id: null,
-        name: '',
-        photo: '',
-        description: '',
-        anime: {
-          id: null,
-          name: ""
-        }
-      };
+      this.character = new Character();
     }
+  }
+  
+  getCharacter(id: number) {
+    this.charactersProvider.findById(id)
+    .then(
+      data => {
+        this.character = data;
+        console.log(this.character);
+      }
+    );
+  }
+
+  getAnime(id: number) {
+    this.animesProvider.findById(id)
+    .then(
+      data => {
+        this.anime = data;
+        console.log(this.anime);
+      }
+    );
   }
 
   saveCharacter(){
     if(this.file){
       this.character.photo = this.file.name;
     }
-    this.character.anime = this.animes[this.anime_id - 1];
-    let alert = this.alertCtrl.create({
-      title: 'Teste!',
-      subTitle: 'Salvando character!',
-      buttons: ['Ok']
-    });
-    alert.present();
-    console.log(this.character.anime.name);
+
+    this.getAnime(this.anime_id);
+    this.character.anime = this.anime;
+    
+    this.charactersProvider.save(this.character)
+    .then(
+      () => {
+        this.toast.create(
+          {
+            message:'Character salvo.',
+            duration:3000,
+            position:'botton'
+          }
+        ).present();
+        this.navCtrl.popToRoot();
+      }
+    )
   }
 
   updateFile(event){

@@ -1,5 +1,16 @@
 {
   "name": "animewiki",
   "integrations": {},
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "proxies": [
+    {
+      "path": "/api/animes",
+      "proxyUrl": "http://xxxxxxxxx/api/animes/"
+    },
+    {
+      "path": "/api/characters",
+      "proxyUrl": "http://xxxxxxxxx/api/characters/"
+    }
+  ],
+  "id": "animewiki"
 }

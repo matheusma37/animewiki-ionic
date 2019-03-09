@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { AnimeFormPage } from '../anime-form/anime-form';
+import { AnimesProvider } from '../../providers/animes/animes';
 
 /**
  * Generated class for the AnimePage page.
@@ -16,32 +17,22 @@ import { AnimeFormPage } from '../anime-form/anime-form';
 })
 
 export class AnimePage {
-  anime: { id: number, name: string, photo: string, description: string } = null;
+  anime: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private alertCtrl: AlertController) {
-    var animes: { id: number, name: string, photo: string, description: string }[] = [
-      {
-        id: 1,
-        name: "Berserk",
-        photo: "#",
-        description: "Anime de terror."
-      },
-      {
-        id: 2,
-        name: "Pokémon",
-        photo: "#",
-        description: "Anime de fantasia."
-      },
-      {
-        id: 3,
-        name: "Digimon",
-        photo: "#",
-        description: "Anime de aventura."
-      }
-    ];
+    private toast: ToastController, public animesProvider: AnimesProvider){
+    
+    this.getAnime(navParams.get('id'));
+  }
 
-    this.anime = animes[parseInt(navParams.get('id'))-1];
+  getAnime(id: number) {
+    this.animesProvider.findById(id)
+    .then(
+      data => {
+        this.anime = data;
+        console.log(this.anime);
+      }
+    );
   }
 
   updateAnime(){
@@ -49,12 +40,19 @@ export class AnimePage {
   }
 
   deleteAnime(){
-    let alert = this.alertCtrl.create({
-      title: 'Teste!',
-      subTitle: 'Deletando anime...',
-      buttons: ['Ok']
-    });
-    alert.present();
+    this.animesProvider.deleteById(this.anime.id)
+    .then(
+      () => {
+        this.toast.create(
+          {
+            message:'Anime removido.',
+            duration:3000,
+            position:'botton'
+          }
+        ).present();
+        this.navCtrl.popToRoot();
+      }
+    )
   }
 
   ionViewDidLoad() {

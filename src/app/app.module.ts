@@ -13,6 +13,9 @@ import { AnimesPage } from '../pages/animes/animes';
 import { CharactersPage } from '../pages/characters/characters';
 import { AnimePage } from '../pages/anime/anime';
 import { CharacterPage } from '../pages/character/character';
+import { AnimesProvider } from '../providers/animes/animes';
+import { CharactersProvider } from '../providers/characters/characters';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,7 @@ import { CharacterPage } from '../pages/character/character';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -43,7 +47,9 @@ import { CharacterPage } from '../pages/character/character';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AnimesProvider,
+    CharactersProvider
   ]
 })
 export class AppModule {}
