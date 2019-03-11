@@ -3,7 +3,7 @@
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>Form</ion-title>
+        <ion-title>Form Anime</ion-title>
     </ion-navbar>
 </ion-header>
 
@@ -16,6 +16,18 @@
         <ion-item>
             <ion-label>Description:</ion-label>
             <ion-textarea [(ngModel)]="anime.description"></ion-textarea>
+        </ion-item>
+        <ion-item>
+            <ion-label>Genre:</ion-label>
+            <ion-input type="text" [(ngModel)]="anime.genre"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Number of Episodes:</ion-label>
+            <ion-input type="number" [(ngModel)]="anime.numberOfEpisodes"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Number of Seasons:</ion-label>
+            <ion-input type="number" [(ngModel)]="anime.numberOfSeasons"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label>Photo:</ion-label>

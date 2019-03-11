@@ -1,7 +1,9 @@
+import { Character } from './../../providers/characters/characters';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { CharacterFormPage } from '../character-form/character-form';
 import { CharactersProvider } from '../../providers/characters/characters';
+import { Anime } from '../../providers/animes/animes';
 
 /**
  * Generated class for the CharacterPage page.
@@ -16,19 +18,22 @@ import { CharactersProvider } from '../../providers/characters/characters';
   templateUrl: 'character.html',
 })
 export class CharacterPage {
-  character: any;
+  character: Character;
   
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private toast: ToastController, public charactersProvider: CharactersProvider) {
-      this.getCharacter(navParams.get('id'));
+      this.getCharacter(this.navParams.data.id);
+      console.log(this.character.anime.name);
   }
   
   getCharacter(id: number) {
+    this.character = new Character();
+    this.character.anime = new Anime();
+    
     this.charactersProvider.findById(id)
     .then(
-      data => {
-        this.character = data;
-        console.log(this.character);
+      (result: any) => {
+        this.character = result;
       }
     );
   }
@@ -50,7 +55,7 @@ export class CharacterPage {
         ).present();
         this.navCtrl.popToRoot();
       }
-    )
+    );
   }
 
   ionViewDidLoad() {

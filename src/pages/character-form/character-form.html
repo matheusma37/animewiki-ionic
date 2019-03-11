@@ -3,7 +3,7 @@
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>Form</ion-title>
+        <ion-title>Form Character</ion-title>
     </ion-navbar>
 </ion-header>
 
@@ -24,6 +24,22 @@
         <ion-item>
             <ion-label>Description:</ion-label>
             <ion-textarea [(ngModel)]="character.description"></ion-textarea>
+        </ion-item>
+        <ion-item>
+            <ion-label>Favorite Food:</ion-label>
+            <ion-input type="text" [(ngModel)]="character.favoriteFood"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Age:</ion-label>
+            <ion-input type="number" [(ngModel)]="character.age"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Height:</ion-label>
+            <ion-input type="number" [(ngModel)]="character.height"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Weight:</ion-label>
+            <ion-input type="number" [(ngModel)]="character.weight"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label>Photo:</ion-label>

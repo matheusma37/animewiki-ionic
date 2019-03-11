@@ -1,3 +1,4 @@
+import { Anime } from './../../providers/animes/animes';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { AnimePage } from '../anime/anime';
@@ -17,7 +18,7 @@ import { AnimesProvider } from '../../providers/animes/animes';
   templateUrl: 'animes.html',
 })
 export class AnimesPage {
-  animes: any;
+  animes: Array<Anime>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private toast: ToastController, public animesProvider: AnimesProvider) {
@@ -31,9 +32,8 @@ export class AnimesPage {
   getAnimes() {
     this.animesProvider.findAll()
     .then(
-      data => {
-        this.animes = data;
-        console.log(this.animes);
+      (result: any) => {
+        this.animes = result;
       }
     );
   }    
@@ -63,7 +63,7 @@ export class AnimesPage {
           }
         ).present();
       }
-    )
+    );
   }
 
 }

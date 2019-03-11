@@ -15,27 +15,21 @@ import { AnimesProvider, Anime } from '../../providers/animes/animes';
   templateUrl: 'anime-form.html',
 })
 export class AnimeFormPage {
-  anime: any;
+  anime: Anime;
   file: File = null;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private toast: ToastController, public animesProvider: AnimesProvider){
-    
-    if(navParams.get('id')){
-      this.getAnime(navParams.get('id'));
-    } else {
       this.anime = new Anime();
-    }
-  }
 
-  getAnime(id: number) {
-    this.animesProvider.findById(id)
-    .then(
-      data => {
-        this.anime = data;
-        console.log(this.anime);
+      if(this.navParams.data.id){
+        this.animesProvider.findById(this.navParams.data.id)
+        .then(
+          (result: any) => {
+            this.anime = result;
+          }
+        );
       }
-    );
   }
 
   saveAnime(){
@@ -55,7 +49,7 @@ export class AnimeFormPage {
         ).present();
         this.navCtrl.popToRoot();
       }
-    )
+    );
   }
 
   updateFile(event){

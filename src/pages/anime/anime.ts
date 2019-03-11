@@ -1,3 +1,4 @@
+import { Anime } from './../../providers/animes/animes';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { AnimeFormPage } from '../anime-form/anime-form';
@@ -17,20 +18,21 @@ import { AnimesProvider } from '../../providers/animes/animes';
 })
 
 export class AnimePage {
-  anime: any;
+  anime: Anime;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private toast: ToastController, public animesProvider: AnimesProvider){
     
-    this.getAnime(navParams.get('id'));
+    this.getAnime(this.navParams.data.id);
   }
 
   getAnime(id: number) {
+    this.anime = new Anime();
+    
     this.animesProvider.findById(id)
     .then(
-      data => {
-        this.anime = data;
-        console.log(this.anime);
+      (result: any) => {
+        this.anime = result;
       }
     );
   }
@@ -52,7 +54,7 @@ export class AnimePage {
         ).present();
         this.navCtrl.popToRoot();
       }
-    )
+    );
   }
 
   ionViewDidLoad() {

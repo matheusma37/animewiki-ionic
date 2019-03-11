@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { CharactersProvider, Character } from '../../providers/characters/characters';
-import { AnimesProvider } from '../../providers/animes/animes';
+import { AnimesProvider, Anime } from '../../providers/animes/animes';
 
 /**
  * Generated class for the CharacterFormPage page.
@@ -16,8 +16,8 @@ import { AnimesProvider } from '../../providers/animes/animes';
   templateUrl: 'character-form.html',
 })
 export class CharacterFormPage {
-  character: any;
-  anime: any;
+  character: Character;
+  animes: Array<Anime>;
   anime_id: number = 0;
   file: File = null;
 
@@ -25,31 +25,25 @@ export class CharacterFormPage {
     private toast: ToastController, public charactersProvider: CharactersProvider,
     public animesProvider: AnimesProvider) {
     
-    if(navParams.get('id')){
-      this.getCharacter(navParams.get('id'));
-    } else {
       this.character = new Character();
-    }
-  }
-  
-  getCharacter(id: number) {
-    this.charactersProvider.findById(id)
-    .then(
-      data => {
-        this.character = data;
-        console.log(this.character);
-      }
-    );
-  }
 
-  getAnime(id: number) {
-    this.animesProvider.findById(id)
-    .then(
-      data => {
-        this.anime = data;
-        console.log(this.anime);
+      if(this.navParams.data.id){
+        this.charactersProvider.findById(this.navParams.data.id)
+        .then(
+          (result: any) => {
+            this.character = result;
+          }
+        );
       }
-    );
+
+      this.animes = new Array<Anime>();
+    
+      this.animesProvider.findAll()
+      .then(
+        (result: any) => {
+          this.animes = result;
+        }
+      );
   }
 
   saveCharacter(){
@@ -57,8 +51,7 @@ export class CharacterFormPage {
       this.character.photo = this.file.name;
     }
 
-    this.getAnime(this.anime_id);
-    this.character.anime = this.anime;
+    this.character.anime = this.animes.find(anime => anime.id == this.anime_id);
     
     this.charactersProvider.save(this.character)
     .then(
@@ -72,7 +65,7 @@ export class CharacterFormPage {
         ).present();
         this.navCtrl.popToRoot();
       }
-    )
+    );
   }
 
   updateFile(event){

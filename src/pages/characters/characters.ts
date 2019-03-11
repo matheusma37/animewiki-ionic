@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { CharacterPage } from '../character/character';
 import { CharacterFormPage } from '../character-form/character-form';
-import { CharactersProvider } from '../../providers/characters/characters';
+import { CharactersProvider, Character } from '../../providers/characters/characters';
 
 /**
  * Generated class for the CharactersPage page.
@@ -17,7 +17,7 @@ import { CharactersProvider } from '../../providers/characters/characters';
   templateUrl: 'characters.html',
 })
 export class CharactersPage {
-  characters: any;
+  characters: Array<Character>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private toast: ToastController, public charactersProvider: CharactersProvider) {
@@ -31,9 +31,8 @@ export class CharactersPage {
   getCharacters() {
     this.charactersProvider.findAll()
     .then(
-      data => {
-        this.characters = data;
-        console.log(this.characters);
+      (result: any) => {
+        this.characters = result;
       }
     );
   }
@@ -67,6 +66,6 @@ export class CharactersPage {
           }
         ).present();
       }
-    )
+    );
   }
 }

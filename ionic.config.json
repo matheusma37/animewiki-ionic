@@ -4,12 +4,12 @@
   "type": "ionic-angular",
   "proxies": [
     {
-      "path": "/api/animes",
-      "proxyUrl": "http://xxxxxxxxx/api/animes/"
+      "path": "/api/animes/",
+      "proxyUrl": "http://localhost:8080/api/animes/"
     },
     {
-      "path": "/api/characters",
-      "proxyUrl": "http://xxxxxxxxx/api/characters/"
+      "path": "/api/characters/",
+      "proxyUrl": "http://localhost:8080/api/characters/"
     }
   ],
   "id": "animewiki"
