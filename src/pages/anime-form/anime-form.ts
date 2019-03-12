@@ -16,7 +16,7 @@ import { AnimesProvider, Anime } from '../../providers/animes/animes';
 })
 export class AnimeFormPage {
   anime: Anime;
-  file: File = null;
+  //file: File = null;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private toast: ToastController, public animesProvider: AnimesProvider){
@@ -33,10 +33,11 @@ export class AnimeFormPage {
   }
 
   saveAnime(){
+    /*
     if(this.file){
       this.anime.photo = this.file.name;
     }
-
+    */
     this.animesProvider.save(this.anime)
     .then(
       () => {
@@ -51,11 +52,11 @@ export class AnimeFormPage {
       }
     );
   }
-
+/*
   updateFile(event){
     this.file = event.srcElement.files[0];
   }
-
+*/
   ionViewDidLoad() {
     console.log('ionViewDidLoad AnimeFormPage');
   }

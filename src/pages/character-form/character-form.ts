@@ -19,7 +19,7 @@ export class CharacterFormPage {
   character: Character;
   animes: Array<Anime>;
   anime_id: number = 0;
-  file: File = null;
+  //file: File = null;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private toast: ToastController, public charactersProvider: CharactersProvider,
@@ -47,10 +47,11 @@ export class CharacterFormPage {
   }
 
   saveCharacter(){
+    /*
     if(this.file){
       this.character.photo = this.file.name;
     }
-
+    */
     this.character.anime = this.animes.find(anime => anime.id == this.anime_id);
     
     this.charactersProvider.save(this.character)
@@ -67,11 +68,11 @@ export class CharacterFormPage {
       }
     );
   }
-
+/*
   updateFile(event){
     this.file = event.srcElement.files[0];
   }
-
+*/
   ionViewDidLoad() {
     console.log('ionViewDidLoad CharacterFormPage');
   }
