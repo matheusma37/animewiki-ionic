@@ -23,12 +23,12 @@ export class CharacterPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private toast: ToastController, public charactersProvider: CharactersProvider) {
       this.getCharacter(this.navParams.data.id);
-      console.log(this.character.anime.name);
   }
   
   getCharacter(id: number) {
     this.character = new Character();
     this.character.anime = new Anime();
+    //this.character.photo = new Photo();
     
     this.charactersProvider.findById(id)
     .then(

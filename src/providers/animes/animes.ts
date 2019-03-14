@@ -108,3 +108,10 @@ export class Anime {
   numberOfEpisodes: number;
   numberOfSeasons: number;
 }
+/*
+export class Photo {
+  id: number;
+  name: string;
+  file: Blob;
+}
+*/

@@ -11,11 +11,9 @@
     <ion-list>
         <ion-item-sliding *ngFor="let anime of animes">
             <ion-item (click)="showAnime(anime.id)">
-                <!--
                 <ion-avatar item-start>
-                    <img src="{{anime.photo}}">
+                    <img src="/api/animes/anime/photo/{{anime.id}}">
                 </ion-avatar>
-                -->
                 <h2>{{anime.name}}</h2>
             </ion-item>
             <ion-item-options side="right">

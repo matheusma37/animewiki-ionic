@@ -99,7 +99,7 @@ export class CharactersProvider {
     );
   }
 }
-    
+  
 export class Character {
   id: number;
   name: string;
@@ -111,3 +111,10 @@ export class Character {
   age: number;
   anime: Anime;
 }
+/*
+export class Photo {
+  id: number;
+  name: string;
+  file: Blob;
+}
+*/

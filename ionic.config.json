@@ -8,8 +8,16 @@
       "proxyUrl": "http://localhost:8080/api/animes/"
     },
     {
+      "path": "/api/animes/anime/photo/",
+      "proxyUrl": "http://localhost:8080/api/animes/anime/photo/"
+    },
+    {
       "path": "/api/characters/",
       "proxyUrl": "http://localhost:8080/api/characters/"
+    },
+    {
+      "path": "/api/characters/character/photo/",
+      "proxyUrl": "http://localhost:8080/api/characters/character/photo/"
     }
   ],
   "id": "animewiki"

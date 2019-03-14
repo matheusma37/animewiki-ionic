@@ -17,11 +17,9 @@
     <ion-list>
         <ion-item-sliding *ngFor="let character of characters">
             <ion-item (click)="showCharacter(character.id)">
-                <!--
                 <ion-avatar item-start>
-                    <img src="{{character.photo}}">
+                    <img src="/api/characters/character/photo/{{character.id}}">
                 </ion-avatar>
-                -->
                 <h2>{{character.name}}</h2>
                 <p>{{character.anime.name}}</p>
             </ion-item>

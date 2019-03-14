@@ -21,6 +21,7 @@ export class AnimeFormPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private toast: ToastController, public animesProvider: AnimesProvider){
       this.anime = new Anime();
+      //this.anime.photo = new Photo();
 
       if(this.navParams.data.id){
         this.animesProvider.findById(this.navParams.data.id)
@@ -33,11 +34,12 @@ export class AnimeFormPage {
   }
 
   saveAnime(){
-    /*
+/*    
     if(this.file){
-      this.anime.photo = this.file.name;
+      this.anime.photo.name = this.file.name;
+      this.anime.photo.file = this.file;
     }
-    */
+*/
     this.animesProvider.save(this.anime)
     .then(
       () => {
@@ -45,7 +47,7 @@ export class AnimeFormPage {
           {
             message:'Anime salvo.',
             duration:3000,
-            position:'botton'
+            position:'top'
           }
         ).present();
         this.navCtrl.popToRoot();

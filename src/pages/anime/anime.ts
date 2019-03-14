@@ -28,7 +28,7 @@ export class AnimePage {
 
   getAnime(id: number) {
     this.anime = new Anime();
-    
+    //this.anime.photo = new Photo();
     this.animesProvider.findById(id)
     .then(
       (result: any) => {

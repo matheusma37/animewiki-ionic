@@ -26,6 +26,8 @@ export class CharacterFormPage {
     public animesProvider: AnimesProvider) {
     
       this.character = new Character();
+      this.character.anime = new Anime();
+      //this.character.photo = new Photo();
 
       if(this.navParams.data.id){
         this.charactersProvider.findById(this.navParams.data.id)
@@ -49,26 +51,38 @@ export class CharacterFormPage {
   saveCharacter(){
     /*
     if(this.file){
-      this.character.photo = this.file.name;
+      this.character.photo.name = this.file.name;
+      this.character.photo.file = this.file;
     }
-    */
-    this.character.anime = this.animes.find(anime => anime.id == this.anime_id);
-    
-    this.charactersProvider.save(this.character)
-    .then(
-      () => {
-        this.toast.create(
-          {
-            message:'Character salvo.',
-            duration:3000,
-            position:'botton'
-          }
-        ).present();
-        this.navCtrl.popToRoot();
+*/
+    if(this.anime_id == 0 && !this.character.id){
+      this.toast.create(
+        {
+          message:'Selecione um anime.',
+          duration:3000,
+          position:'top'
+        }
+      ).present();
+    } else {
+      if(this.character.id && this.anime_id != 0){
+        this.character.anime = this.animes.find(anime => anime.id == this.anime_id);
       }
-    );
+      this.charactersProvider.save(this.character)
+      .then(
+        () => {
+          this.toast.create(
+            {
+              message:'Character salvo.',
+              duration:3000,
+              position:'top'
+            }
+          ).present();
+          this.navCtrl.popToRoot();
+        }
+      );
+    }
   }
-/*
+/*  
   updateFile(event){
     this.file = event.srcElement.files[0];
   }
